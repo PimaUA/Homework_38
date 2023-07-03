@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    password: 0637490353pimaua
+    url: jdbc:mysql://localhost:3306/homework_36
+    username: root
+
+logging:
+  file.name: src/logs/dev_app.log
+  level:
+    org.springframework.web: INFO
+    org.springframework.web.controller: INFO
+    org.springframework.web.model: INFO
+    org.springframework.web.repository: INFO
+    org.springframework.web.service: INFO
