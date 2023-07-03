@@ -35,6 +35,12 @@ public class OrderService {
     }
 
     public void deleteOrder(int id) {
-        orderRepository.deleteById(id);
+        Order order;
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (optionalOrder.isPresent()) {
+            orderRepository.deleteById(id);
+        } else {
+            throw new RuntimeException();
+        }
     }
 }
