@@ -1,5 +1,6 @@
 package org.springframework.web.Homework_38.controller;
 
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class OrderController {
         List<Order> orderList;
         try {
             orderList = orderService.getAllOrders();
-        } catch (Exception e) {
+        } catch (ObjectNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No orders available ", e);
         }
         return orderList;
@@ -33,7 +34,7 @@ public class OrderController {
         Order order;
         try {
             order = orderService.getOrderById(id);
-        } catch (Exception e) {
+        } catch (ObjectNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order not found ", e);
         }
         return order;
@@ -43,7 +44,7 @@ public class OrderController {
     public Order showAddedOrder(@RequestBody Order order) {
         try {
             orderService.addOrder(order);
-        } catch (Exception e) {
+        } catch (ObjectNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order not added ", e);
         }
         return order;
@@ -53,7 +54,7 @@ public class OrderController {
     public String showDeletedOrder(@PathVariable int id) {
         try{
         orderService.deleteOrder(id);}
-        catch (Exception e){
+        catch (ObjectNotFoundException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order not deleted ", e);
         }
         return "Order with id " + id + " have been deleted";

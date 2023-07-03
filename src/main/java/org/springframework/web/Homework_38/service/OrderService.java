@@ -1,5 +1,6 @@
 package org.springframework.web.Homework_38.service;
 
+import org.hibernate.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class OrderService {
         if (optionalOrder.isPresent()) {
             order = optionalOrder.get();
         } else {
-            throw new RuntimeException();
+            throw new ObjectNotFoundException(id,"order");
         }
         return order;
     }
@@ -45,7 +46,7 @@ public class OrderService {
             orderRepository.deleteById(id);
             LOGGER.info("Order deleted");
         } else {
-            throw new RuntimeException();
+            throw new ObjectNotFoundException(id,"order");
         }
     }
 }
